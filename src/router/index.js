@@ -7,7 +7,6 @@ Vue.use(Router)
 import Layout from '@/layout'
 
 /* Router Modules */
-import componentsRouter from './modules/components'
 import chartsRouter from './modules/charts'
 import tableRouter from './modules/table'
 import nestedRouter from './modules/nested'
@@ -135,6 +134,17 @@ export const constantRoutes = [
   //     }
   //   ]
   // },
+
+  {
+    path: '/purchase-request',
+    component: () => import('@/views/purchase-request/index'),
+    name: '采购申请',
+    meta: {
+      title: '采购申请',
+      icon: 'shopping',
+      roles: ['admin']
+    }
+  },
   {
     path: '/guide',
     component: Layout,
@@ -161,7 +171,7 @@ export const constantRoutes = [
         meta: { title: 'Profile', icon: 'user', noCache: true }
       }
     ]
-  },
+  }
 ]
 
 /**
