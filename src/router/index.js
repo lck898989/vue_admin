@@ -7,9 +7,10 @@ Vue.use(Router)
 import Layout from '@/layout'
 
 /* Router Modules */
-import chartsRouter from './modules/charts'
 import tableRouter from './modules/table'
-import nestedRouter from './modules/nested'
+import assetsChange from './modules/assets-change'
+import assetsDisposalRouter from './modules/assets-disposal'
+import dataReportRouter from './modules/data-report'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -136,28 +137,64 @@ export const constantRoutes = [
   // },
 
   {
-    path: '/purchase-request',
-    component: () => import('@/views/purchase-request/index'),
-    name: '采购申请',
-    meta: {
-      title: '采购申请',
-      icon: 'shopping',
-      roles: ['admin']
-    }
-  },
-  {
-    path: '/guide',
+    path: '/',
     component: Layout,
-    redirect: '/guide/index',
+    redirect: '/assets-income',
+
     children: [
       {
-        path: 'index',
-        component: () => import('@/views/guide/index'),
-        name: 'Guide',
-        meta: { title: 'Guide', icon: 'guide', noCache: true }
+        path: 'assets-income',
+        component: () => import('@/views/assets-income/index'),
+        name: '资产入账',
+        meta: { title: '资产入账', icon: 'shopping', affix: true }
       }
     ]
   },
+  assetsChange,
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/data-search-center',
+
+    children: [
+      {
+        path: 'data-search-center',
+        component: () => import('@/views/data-search-center/index'),
+        name: '数据查询中心',
+        meta: { title: '数据查询中心', icon: 'shopping', affix: true }
+      }
+    ]
+  },
+  assetsDisposalRouter,
+
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/assets-inspect',
+
+    children: [
+      {
+        path: 'assets-inspect',
+        component: () => import('@/views/assets-inspect/index'),
+        name: '资产清查',
+        meta: { title: '资产清查', icon: 'shopping', affix: true }
+      }
+    ]
+  },
+  dataReportRouter,
+  // {
+  //   path: '/guide',
+  //   component: Layout,
+  //   redirect: '/guide/index',
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/guide/index'),
+  //       name: 'Guide',
+  //       meta: { title: 'Guide', icon: 'guide', noCache: true }
+  //     }
+  //   ]
+  // },
   {
     path: '/profile',
     component: Layout,
@@ -237,8 +274,8 @@ export const asyncRoutes = [
 
   /** when your routing map is too long, you can split it into small modules **/
   // componentsRouter,
-  chartsRouter,
-  nestedRouter,
+  // chartsRouter,
+  // nestedRouter,
   tableRouter,
 
   // {
