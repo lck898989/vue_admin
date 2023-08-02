@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <div class="">资产登记</div>
+  <div class="">参数设置</div>
 </template>
 
 <script>
@@ -8,8 +8,7 @@
 // 例如：import 《组件名称》 from '《组件路径》';
 
 export default {
-  name: 'AssetsRegister',
-  // import引入的组件需要注入到对象中才能使用
+// import引入的组件需要注入到对象中才能使用
   components: {},
   data() {
     // 这里存放数据

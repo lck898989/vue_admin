@@ -16,6 +16,7 @@ export default {
       return this.$store.state.tagsView.cachedViews
     },
     key() {
+      // 返回当前路由的路径
       return this.$route.path
     }
   }

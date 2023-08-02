@@ -11,7 +11,7 @@
       </el-col>
       <el-col :span="10" class="right-container">
         <template v-if="isRegister">
-          <h1>资产登记</h1>
+          <!-- <asset-register /> -->
         </template>
         <template v-else>
           <h1>资产管理</h1>
@@ -23,11 +23,12 @@
 </template>
 
 <script>
+// import AssetsRegister from '@/views/assets-income/asset-register/index.vue'
 
 export default {
   name: 'DashboardAdmin',
   components: {
-
+    // AssetsRegister
   },
   data() {
     return {

@@ -11,6 +11,7 @@ import tableRouter from './modules/table'
 import assetsChange from './modules/assets-change'
 import assetsDisposalRouter from './modules/assets-disposal'
 import dataReportRouter from './modules/data-report'
+import systemManagerRouter from './modules/system-manager'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -182,6 +183,7 @@ export const constantRoutes = [
     ]
   },
   dataReportRouter,
+  systemManagerRouter,
   // {
   //   path: '/guide',
   //   component: Layout,
