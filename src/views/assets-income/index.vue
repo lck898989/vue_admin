@@ -1,34 +1,47 @@
 <template>
   <div class="dashboard-editor-container">
-    <el-row :gutter="20" class="row-container">
-      <el-col :span="10" class="left-container">
+    <div class="app-income-container">
+      <div class="left-container">
         <ul>
           <li v-for="item in leftList" :key="item.text" @click="clickListItem(item.text)">
             <i :class="item.icon" style="color: blue;" />
             <span style="padding: 5px;">{{ item.text }}</span>
           </li>
         </ul>
+      </div>
+      <div class="right-container">
+        <transition name="slide-right" mode="in-out">
+          <template v-if="isRegister">
+            <AssetsRegister />
+          </template>
+          <template v-else>
+            <AssetsConfig />
+          </template>
+        </transition>
+      </div>
+
+    </div>
+    <!-- <el-row :gutter="20" class="row-container">
+      <el-col :span="10" class="left-container">
+
       </el-col>
       <el-col :span="10" class="right-container">
-        <template v-if="isRegister">
-          <!-- <asset-register /> -->
-        </template>
-        <template v-else>
-          <h1>资产管理</h1>
-        </template>
+
       </el-col>
-    </el-row>
+    </el-row> -->
 
   </div>
 </template>
 
 <script>
-// import AssetsRegister from '@/views/assets-income/asset-register/index.vue'
+import AssetsRegister from '@/views/assets-income/assets-register/index.vue'
+import AssetsConfig from '@/views/assets-income/assets-config/index.vue'
 
 export default {
   name: 'DashboardAdmin',
   components: {
-    // AssetsRegister
+    AssetsRegister,
+    AssetsConfig
   },
   data() {
     return {
@@ -40,7 +53,8 @@ export default {
         {
           text: '资产配置',
           icon: 'el-icon-s-promotion'
-        }],
+        }
+      ],
       /** 是否资产是登记页面 */
       isRegister: true
 
@@ -63,6 +77,51 @@ export default {
 </script>
 
   <style lang="scss" scoped>
+
+// .fade-enter-active, .fade-leave-active {
+//   transition: opacity .5s;
+// }
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.slide-right-enter,
+.slide-right-leave-to {
+  transform: translateX(100%);
+  transition: transform 0.5s;
+}
+
+// .slide-right-enter-active,
+// .slide-right-leave-active {
+//   transition: transform 0.5s;
+// }
+
+// .fade-enter {
+//   opacity: 0;
+// }
+
+// .fade-enter-to {
+//   opacity: 1;
+//   transition: opacity .3s;
+// }
+
+// .fade-leave {
+//   opacity: 1;
+// }
+
+// .fade-leave-to {
+//   opacity: 0;
+//   transition: opacity .3s;
+// }
+
+  .app-income-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+  }
 
   .common-row {
     display: flex;
@@ -91,7 +150,7 @@ export default {
   }
 
   .dashboard-editor-container {
-    padding: 30px;
+    padding: 5px 10px;
     background-color: rgb(240, 242, 245);
     position: relative;
     min-height: 100vh;
@@ -107,10 +166,12 @@ export default {
 
     }
     .left-container {
-      width: 15vw;
-      height: 200px;
+      min-width: 8vw;
+      min-height: 100vh;
       background-color: #fff;
-      padding: 20px;
+      padding: 10px;
+
+      border-radius: 10px;
 
       .left-item {
         padding: 10px;
@@ -123,11 +184,11 @@ export default {
     }
     .right-container {
       width: 100%;
-      height: 500px;
-      background-color: #fff;
       margin-left: 1vw;
+      border-radius: 10px;
+      background-color: #fff;
 
-      padding: 20px;
+      padding: 10px;
 
       .top {
         justify-content: space-between;

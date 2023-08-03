@@ -23,6 +23,9 @@
       <el-checkbox v-model="showReviewer" class="filter-item" style="margin-left:15px;" @change="tableKey=tableKey+1">
         reviewer
       </el-checkbox>
+      <el-button v-waves :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-setting" style="margin-left: 17vw;" @click="editor">
+        编辑
+      </el-button>
     </div>
 
     <el-table
@@ -143,6 +146,15 @@
         <el-button type="primary" @click="dialogPvVisible = false">Confirm</el-button>
       </span>
     </el-dialog>
+
+    <transition name="zoom-fade" mode="in-out">
+      <div v-if="isFullpage" class="full-page">
+        <div class="full-page-header">
+          <!--退出icon-->
+          <i class="el-icon-close" style="width: 64px;height: 64px;" @click="editor" />
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -166,7 +178,7 @@ const calendarTypeKeyValue = calendarTypeOptions.reduce((acc, cur) => {
 }, {})
 
 export default {
-  name: 'AssetsConfig',
+  name: 'AssetsRegister',
   components: { Pagination },
   directives: { waves },
   filters: {
@@ -223,7 +235,8 @@ export default {
         timestamp: [{ type: 'date', required: true, message: 'timestamp is required', trigger: 'change' }],
         title: [{ required: true, message: 'title is required', trigger: 'blur' }]
       },
-      downloadLoading: false
+      downloadLoading: false,
+      isFullpage: false
     }
   },
   created() {
@@ -332,6 +345,11 @@ export default {
         }
       })
     },
+
+    editor() {
+      this.isFullpage = !this.isFullpage
+    },
+
     handleDelete(row, index) {
       this.$notify({
         title: 'Success',
@@ -379,6 +397,42 @@ export default {
 </script>
 <style lang="scss" scoped>
 .app-container {
-  scroll-behavior: auto;
+  // scroll-behavior: auto;
 }
+
+.full-page {
+  position: fixed;
+  top: 0vh;
+  left: 0vw;
+  width: 100vw;
+  height: 100vh;
+
+  padding: 20px 30px;
+
+  background-color: #fff;
+  z-index: 9999;
+}
+
+.zoom-fade-enter {
+  transform: scale(0);
+  opacity: 0;
+}
+
+.zoom-fade-enter-to {
+  transform: scale(1);
+  opacity: 1;
+  transition: transform .3s, opacity .3s;
+}
+
+.zoom-fade-leave {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.zoom-fade-leave-to {
+  transform: scale(0);
+  opacity: 0;
+  transition: transform .3s, opacity .3s;
+}
+
 </style>
